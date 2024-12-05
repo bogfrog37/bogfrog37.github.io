@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="style.css" rel="stylesheet" type="text/css" />
 	<title>Gin's Website</title>
 <style>
-h1 {text-align: center;
+  h1, h2, h3 {text-align: center;
     color: #182716;
     background-color: #ffe2ee}
-h2 {text-align: center;
-    color: #182716;
-    background-color: #ffe2ee}
-h3 {text-align: center;
-   color: #182716;
-   background-color: #ffe2ee;}
-body {text-align: center;
+	
+  body {text-align: center;
     color: #2f4e2c;
     background-color: #d0e7d0;}
-p {background-color: #ffe2ee;}
+	
+  p {background-color: #ffe2ee;}
+	
+  .MyPic img {
+    width: 450px;
+    max-width: 450px;
+    transition: transform 0.3s ease, opacity 0.3s ease;}
+   #encouragementForm {
+	margin-top: 20px;}
+
+    textarea {
+	width: 300px;
+	height: 100px;
+	font-size: 16px;
+	padding: 10px;
+    	background-color: #eeffe2;
+    	color: #8b3c4c;}
+
+    #submitButton {
+	font-size: 16px;
+	padding: 10px 20px;
+	margin-top: 10px;
+	cursor: pointer;
+    	color: #4c8b3c;}
+
+    #encouragementMessage {
+	margin-top: 20px;
+	font-size: 18px;
+	background-color: #2f4e2c;
+	color: #8b3c4c;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Virginia Russell</h1>
+<h1 class="myName">Virginia Russell</h1>
 <div class="MyPic"><img src="https://res.cloudinary.com/dbw2zb2ij/image/upload/v1726186793/my-face-red_oa7cep.jpg"/></div>
 <h2>My Web Design Experience</h2>
 <p>I don't have that much firsthand experience with web programming and development. Before this semester, I only took two classes on the subject and I had not ever independently learned about it.</p>
@@ -29,3 +52,40 @@ p {background-color: #ffe2ee;}
 <p>I would like to gain a solid grasp on developer tools for web design and programming. I feel mostly comfortable with HTML and CSS, so I would like to continue to sharpen those skills in addition to gaining practical knowledge about designing functional complex websites.</p>
 <h2>My future with web design</h2>
 <p>I'm kind of pivoting towards becoming a DBA so I don't know how much I'll use these skills on the job, but I still think they're extremely useful to have in my arsenal in the modern age.</p>
+	<div id="encouragementForm">
+		<h2>Leave some words of encouragement here:</h2>
+		<textarea id="encouragementText" placeholder="Type some nice things..."></textarea><br>
+		<button id="submitButton">Submit</button>
+	</div>
+
+	<div id="encouragementMessage"></div>
+	<ul id="encouragementList"></ul>
+
+    <script type="text/javascript">
+	$(document).ready(function() {
+		$("h1").removeClass("myName").hide().fadeIn(1000);
+		$(".MyPic").hover(
+			function() {
+				$(this).find("img").attr("src", "https://res.cloudinary.com/djbjylmzr/image/upload/v1733440566/frob-in-pont.jpg");
+				$(this).find("img").css("opacity", "0.8");
+				}, 
+			function() {
+				$(this).find("img").attr("src", "https://res.cloudinary.com/dbw2zb2ij/image/upload/v1726186793/my-face-red_oa7cep.jpg");
+				$(this).find("img").css("opacity", "1");
+			}
+		);
+		$("#submitButton").click(function() {
+			var encouragementText = $("#encouragementText").val().trim();
+
+			if (encouragementText) {
+				$("#encouragementMessage").html("<h3>Thank you for your encouragement:</h3>");
+				$("#encouragementList").append("<li>" + encouragementText + "</li>");
+				$("#encouragementText").val("");
+			} else {
+				$("#encouragementMessage").html("<p style='color: #271618;'>Please say something nice before you submit!.</p>");
+			}
+		});
+	});
+    </script>
+</body>
+</html>
